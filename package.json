@@ -1,0 +1,21 @@
+{
+  "name": "com.baracuda.dots",
+  "version": "1.0.0",
+  "displayName": "DOTS",
+  "description": "Data oriented systems and utilities",
+  "unity": "2023.2",
+  "documentationUrl": "https://github.com/JohnBaracuda/com.baracuda.dots",
+  "changelogUrl": "https://github.com/JohnBaracuda/com.baracuda.dots/blob/main/CHANGELOG.md",
+  "licensesUrl": "https://github.com/JohnBaracuda/com.baracuda.dots/blob/main/LICENSE.md",
+  "keywords": [
+    "dots",
+    "ecs",
+    "burst"
+  ],
+  "author": {
+    "name": "John Baracuda",
+    "email": "johnbaracudagames@gmail.com",
+    "url": "https://github.com/JohnBaracuda"
+  },
+  "type": "tool"
+}
