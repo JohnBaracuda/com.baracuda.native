@@ -17,5 +17,9 @@
     "email": "johnbaracudagames@gmail.com",
     "url": "https://github.com/JohnBaracuda"
   },
-  "type": "tool"
+  "type": "tool",
+  "dependencies": {
+    "com.unity.burst": "1.8.15",
+    "com.unity.collections": "2.4.1"
+  }
 }
