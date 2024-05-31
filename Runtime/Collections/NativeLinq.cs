@@ -10,6 +10,7 @@ namespace Baracuda.DOTS.Collections
     {
         #region UnsafeHashSet
 
+        [BurstCompile]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void ExceptWith<T>(ref UnsafeHashSet<T> hashSet, UnsafeList<T> array)
             where T : unmanaged, IEquatable<T>
@@ -21,6 +22,7 @@ namespace Baracuda.DOTS.Collections
             }
         }
 
+        [BurstCompile]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void UnionWith<T>(ref UnsafeHashSet<T> hashSet, UnsafeList<T> array)
             where T : unmanaged, IEquatable<T>
@@ -41,6 +43,7 @@ namespace Baracuda.DOTS.Collections
 
         #region UnsafeList
 
+        [BurstCompile]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void ExceptWith<T>(ref UnsafeList<T> list, UnsafeList<T> array)
             where T : unmanaged, IEquatable<T>
@@ -59,6 +62,7 @@ namespace Baracuda.DOTS.Collections
             }
         }
 
+        [BurstCompile]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void UnionWith<T>(ref UnsafeList<T> list, UnsafeList<T> array)
             where T : unmanaged, IEquatable<T>
@@ -74,6 +78,7 @@ namespace Baracuda.DOTS.Collections
             }
         }
 
+        [BurstCompile]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void RemoveWhere<T, TPredicate>(ref UnsafeList<T> list, in TPredicate predicate)
             where T : unmanaged
@@ -81,7 +86,7 @@ namespace Baracuda.DOTS.Collections
         {
             for (var index = list.Length - 1; index >= 0; index--)
             {
-                var removeElement = predicate.Evaluate(ref list.GetRef(index));
+                var removeElement = predicate.Evaluate(in list.GetRef(index));
                 if (removeElement)
                 {
                     list.RemoveAt(index);
@@ -89,6 +94,7 @@ namespace Baracuda.DOTS.Collections
             }
         }
 
+        [BurstCompile]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static unsafe void RemoveWhere<T, TPredicate>(UnsafeList<T>* list, TPredicate* predicate)
             where T : unmanaged
@@ -96,7 +102,7 @@ namespace Baracuda.DOTS.Collections
         {
             for (var index = list->Length - 1; index >= 0; index--)
             {
-                var removeElement = predicate->Evaluate(ref list->GetRef(index));
+                var removeElement = predicate->Evaluate(in list->GetRef(index));
                 if (removeElement)
                 {
                     list->RemoveAt(index);
