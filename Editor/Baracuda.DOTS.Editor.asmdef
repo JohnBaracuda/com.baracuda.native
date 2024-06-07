@@ -1,0 +1,24 @@
+{
+    "name": "Baracuda.DOTS.Editor",
+    "rootNamespace": "Baracuda.DOTS",
+    "references": [
+        "Baracuda.DOTS",
+        "Unity.Entities",
+        "Unity.Entities.Hybrid",
+        "Unity.Entities.Build",
+        "Unity.Burst",
+        "Unity.Collections",
+        "Unity.Mathematics"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

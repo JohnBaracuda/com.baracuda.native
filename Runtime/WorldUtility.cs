@@ -4,7 +4,7 @@ namespace Baracuda.DOTS
 {
     public static class WorldUtility
     {
-        public static void DestroyLocalSimulationWorld()
+        public static void DestroyLocalGameSimulationWorld()
         {
             for (var index = World.All.Count - 1; index >= 0; index--)
             {
