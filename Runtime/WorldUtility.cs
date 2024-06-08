@@ -4,7 +4,7 @@ namespace Baracuda.DOTS
 {
     public static class WorldUtility
     {
-        public static void DestroyLocalGameSimulationWorld()
+        public static void DestroyGameWorlds()
         {
             for (var index = World.All.Count - 1; index >= 0; index--)
             {
@@ -12,12 +12,11 @@ namespace Baracuda.DOTS
                 if (world.Flags == WorldFlags.Game)
                 {
                     world.Dispose();
-                    break;
                 }
             }
         }
 
-        public static void DestroyClientWorlds()
+        public static void DestroyGameClientWorlds()
         {
             for (var index = World.All.Count - 1; index >= 0; index--)
             {
@@ -29,7 +28,7 @@ namespace Baracuda.DOTS
             }
         }
 
-        public static void DestroyThinClientWorlds()
+        public static void DestroyGameThinClientWorlds()
         {
             for (var index = World.All.Count - 1; index >= 0; index--)
             {
@@ -41,7 +40,7 @@ namespace Baracuda.DOTS
             }
         }
 
-        public static void DestroyServerWorlds()
+        public static void DestroyGameServerWorlds()
         {
             for (var index = World.All.Count - 1; index >= 0; index--)
             {
