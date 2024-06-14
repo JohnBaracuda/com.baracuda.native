@@ -6,13 +6,12 @@ using Unity.Burst;
 using Unity.Collections;
 using Unity.Collections.LowLevel.Unsafe;
 
-namespace Baracuda.DOTS.Collections
+namespace Baracuda.Native.Collections
 {
     [BurstCompile]
     public struct UnsafeArray<T> : IDisposable where T : unmanaged
     {
-        [NativeDisableUnsafePtrRestriction]
-        private unsafe T* _buffer;
+        [NativeDisableUnsafePtrRestriction] private unsafe T* _buffer;
         private readonly Allocator _allocator;
         public int Length { get; private set; }
         public readonly bool IsCreated;
@@ -23,9 +22,10 @@ namespace Baracuda.DOTS.Collections
             Length = capacity;
             unsafe
             {
-                _buffer = (T*) UnsafeUtility.Malloc(UnsafeUtility.SizeOf<T>() * capacity, UnsafeUtility.AlignOf<T>(),
+                _buffer = (T*)UnsafeUtility.Malloc(UnsafeUtility.SizeOf<T>() * capacity, UnsafeUtility.AlignOf<T>(),
                     allocator);
             }
+
             IsCreated = true;
         }
 
@@ -35,13 +35,12 @@ namespace Baracuda.DOTS.Collections
             Length = array.Length;
             unsafe
             {
-                _buffer = (T*) UnsafeUtility.Malloc(UnsafeUtility.SizeOf<T>() * Length, UnsafeUtility.AlignOf<T>(),
+                _buffer = (T*)UnsafeUtility.Malloc(UnsafeUtility.SizeOf<T>() * Length, UnsafeUtility.AlignOf<T>(),
                     allocator);
                 for (var index = 0; index < Length; index++)
-                {
                     UnsafeUtility.WriteArrayElement(_buffer, index, array[index]);
-                }
             }
+
             IsCreated = true;
         }
 
@@ -51,13 +50,12 @@ namespace Baracuda.DOTS.Collections
             Length = array.Length;
             unsafe
             {
-                _buffer = (T*) UnsafeUtility.Malloc(UnsafeUtility.SizeOf<T>() * Length, UnsafeUtility.AlignOf<T>(),
+                _buffer = (T*)UnsafeUtility.Malloc(UnsafeUtility.SizeOf<T>() * Length, UnsafeUtility.AlignOf<T>(),
                     allocator);
                 for (var index = 0; index < Length; index++)
-                {
                     UnsafeUtility.WriteArrayElement(_buffer, index, array[index]);
-                }
             }
+
             IsCreated = true;
         }
 
@@ -67,13 +65,12 @@ namespace Baracuda.DOTS.Collections
             Length = array.Length;
             unsafe
             {
-                _buffer = (T*) UnsafeUtility.Malloc(UnsafeUtility.SizeOf<T>() * Length, UnsafeUtility.AlignOf<T>(),
+                _buffer = (T*)UnsafeUtility.Malloc(UnsafeUtility.SizeOf<T>() * Length, UnsafeUtility.AlignOf<T>(),
                     allocator);
                 for (var index = 0; index < Length; index++)
-                {
                     UnsafeUtility.WriteArrayElement(_buffer, index, array[index]);
-                }
             }
+
             IsCreated = true;
         }
 
@@ -83,13 +80,12 @@ namespace Baracuda.DOTS.Collections
             Length = list.Length;
             unsafe
             {
-                _buffer = (T*) UnsafeUtility.Malloc(UnsafeUtility.SizeOf<T>() * Length, UnsafeUtility.AlignOf<T>(),
+                _buffer = (T*)UnsafeUtility.Malloc(UnsafeUtility.SizeOf<T>() * Length, UnsafeUtility.AlignOf<T>(),
                     allocator);
                 for (var index = 0; index < Length; index++)
-                {
                     UnsafeUtility.WriteArrayElement(_buffer, index, list[index]);
-                }
             }
+
             IsCreated = true;
         }
 
@@ -99,13 +95,12 @@ namespace Baracuda.DOTS.Collections
             Length = list.Length;
             unsafe
             {
-                _buffer = (T*) UnsafeUtility.Malloc(UnsafeUtility.SizeOf<T>() * Length, UnsafeUtility.AlignOf<T>(),
+                _buffer = (T*)UnsafeUtility.Malloc(UnsafeUtility.SizeOf<T>() * Length, UnsafeUtility.AlignOf<T>(),
                     allocator);
                 for (var index = 0; index < Length; index++)
-                {
                     UnsafeUtility.WriteArrayElement(_buffer, index, list[index]);
-                }
             }
+
             IsCreated = true;
         }
 
@@ -115,14 +110,12 @@ namespace Baracuda.DOTS.Collections
             Length = collection.Count;
             unsafe
             {
-                _buffer = (T*) UnsafeUtility.Malloc(UnsafeUtility.SizeOf<T>() * Length, UnsafeUtility.AlignOf<T>(),
+                _buffer = (T*)UnsafeUtility.Malloc(UnsafeUtility.SizeOf<T>() * Length, UnsafeUtility.AlignOf<T>(),
                     allocator);
                 var index = 0;
-                foreach (var item in collection)
-                {
-                    UnsafeUtility.WriteArrayElement(_buffer, index++, item);
-                }
+                foreach (var item in collection) UnsafeUtility.WriteArrayElement(_buffer, index++, item);
             }
+
             IsCreated = true;
         }
 
@@ -133,15 +126,13 @@ namespace Baracuda.DOTS.Collections
             {
                 // ReSharper disable once PossibleMultipleEnumeration
                 Length = collection.Count();
-                _buffer = (T*) UnsafeUtility.Malloc(UnsafeUtility.SizeOf<T>() * Length, UnsafeUtility.AlignOf<T>(),
+                _buffer = (T*)UnsafeUtility.Malloc(UnsafeUtility.SizeOf<T>() * Length, UnsafeUtility.AlignOf<T>(),
                     allocator);
                 var index = 0;
                 // ReSharper disable once PossibleMultipleEnumeration
-                foreach (var item in collection)
-                {
-                    UnsafeUtility.WriteArrayElement(_buffer, index++, item);
-                }
+                foreach (var item in collection) UnsafeUtility.WriteArrayElement(_buffer, index++, item);
             }
+
             IsCreated = true;
         }
 
@@ -152,9 +143,7 @@ namespace Baracuda.DOTS.Collections
                 unsafe
                 {
                     if (index < 0 || index >= Length)
-                    {
                         throw new IndexOutOfRangeException($"Index {index} is out of range of '{Length}' Length.");
-                    }
                     return UnsafeUtility.ReadArrayElement<T>(_buffer, index);
                 }
             }
@@ -163,9 +152,7 @@ namespace Baracuda.DOTS.Collections
                 unsafe
                 {
                     if (index < 0 || index >= Length)
-                    {
                         throw new IndexOutOfRangeException($"Index {index} is out of range of '{Length}' Length.");
-                    }
                     UnsafeUtility.WriteArrayElement(_buffer, index, value);
                 }
             }
@@ -194,6 +181,7 @@ namespace Baracuda.DOTS.Collections
                 UnsafeUtility.MemCpy(NativeArrayUnsafeUtility.GetUnsafeBufferPointerWithoutChecks(array), _buffer,
                     Length * UnsafeUtility.SizeOf<T>());
             }
+
             return array;
         }
 
@@ -202,10 +190,7 @@ namespace Baracuda.DOTS.Collections
         public UnsafeList<T> ToUnsafeList(Allocator allocator)
         {
             var list = new UnsafeList<T>(Length, allocator);
-            for (var index = 0; index < Length; index++)
-            {
-                list.Add(this[index]);
-            }
+            for (var index = 0; index < Length; index++) list.Add(this[index]);
             return list;
         }
     }

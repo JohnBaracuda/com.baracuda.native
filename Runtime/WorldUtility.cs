@@ -1,9 +1,11 @@
 using Unity.Entities;
 
-namespace Baracuda.DOTS
+namespace Baracuda.Native
 {
     public static class WorldUtility
     {
+        public const WorldSystemFilterFlags ServerClientThinFlags = WorldSystemFilterFlags.ServerSimulation | WorldSystemFilterFlags.ClientSimulation | WorldSystemFilterFlags.ThinClientSimulation;
+
         public static void DestroyGameWorlds()
         {
             for (var index = World.All.Count - 1; index >= 0; index--)

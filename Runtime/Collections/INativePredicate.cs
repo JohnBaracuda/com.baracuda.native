@@ -1,6 +1,6 @@
 ﻿using JetBrains.Annotations;
 
-namespace Baracuda.DOTS.Collections
+namespace Baracuda.Native.Collections
 {
     public interface INativePredicate<T> where T : unmanaged
     {

@@ -5,7 +5,7 @@ using Unity.Burst;
 using Unity.Collections;
 using Unity.Collections.LowLevel.Unsafe;
 
-namespace Baracuda.DOTS.Collections
+namespace Baracuda.Native.Collections
 {
     public static class NativeCollectionExtensions
     {
@@ -15,10 +15,7 @@ namespace Baracuda.DOTS.Collections
         public static unsafe ref T GetRef<T>(this NativeArray<T> array, int index)
             where T : struct
         {
-            if (index < 0 || index >= array.Length)
-            {
-                throw new ArgumentOutOfRangeException(nameof(index));
-            }
+            if (index < 0 || index >= array.Length) throw new ArgumentOutOfRangeException(nameof(index));
             return ref UnsafeUtility.ArrayElementAsRef<T>(array.GetUnsafePtr(), index);
         }
 
@@ -26,10 +23,7 @@ namespace Baracuda.DOTS.Collections
         public static unsafe ref T GetRef<T>(this NativeList<T> list, int index)
             where T : unmanaged
         {
-            if (index < 0 || index >= list.Length)
-            {
-                throw new ArgumentOutOfRangeException(nameof(index));
-            }
+            if (index < 0 || index >= list.Length) throw new ArgumentOutOfRangeException(nameof(index));
             return ref UnsafeUtility.ArrayElementAsRef<T>(list.GetUnsafePtr(), index);
         }
 
@@ -37,10 +31,7 @@ namespace Baracuda.DOTS.Collections
         public static unsafe ref T GetRef<T>(this UnsafeList<T> list, int index)
             where T : unmanaged
         {
-            if (index < 0 || index >= list.Length)
-            {
-                throw new ArgumentOutOfRangeException(nameof(index));
-            }
+            if (index < 0 || index >= list.Length) throw new ArgumentOutOfRangeException(nameof(index));
             return ref UnsafeUtility.ArrayElementAsRef<T>(&list, index);
         }
 
@@ -77,6 +68,7 @@ namespace Baracuda.DOTS.Collections
                 array[index] = element;
                 index++;
             }
+
             return array;
         }
 
@@ -91,10 +83,7 @@ namespace Baracuda.DOTS.Collections
             Allocator allocator) where T : unmanaged
         {
             var list = new UnsafeList<T>(collection.Count, allocator);
-            foreach (var element in collection)
-            {
-                list.Add(element);
-            }
+            foreach (var element in collection) list.Add(element);
             return list;
         }
 
@@ -104,10 +93,7 @@ namespace Baracuda.DOTS.Collections
             where T : unmanaged
         {
             var list = new UnsafeList<T>(nativeList.Length, allocator);
-            for (var index = 0; index < nativeList.Length; index++)
-            {
-                list.Add(nativeList[index]);
-            }
+            for (var index = 0; index < nativeList.Length; index++) list.Add(nativeList[index]);
             return list;
         }
 
@@ -117,10 +103,7 @@ namespace Baracuda.DOTS.Collections
             where T : unmanaged
         {
             var list = new UnsafeList<T>(nativeArray.Length, allocator);
-            for (var index = 0; index < nativeArray.Length; index++)
-            {
-                list.Add(nativeArray[index]);
-            }
+            for (var index = 0; index < nativeArray.Length; index++) list.Add(nativeArray[index]);
             return list;
         }
 
@@ -129,10 +112,7 @@ namespace Baracuda.DOTS.Collections
             where T : unmanaged
         {
             var list = new UnsafeList<T>(origin.Length, allocator);
-            for (var index = 0; index < origin.Length; index++)
-            {
-                list.Add(origin[index]);
-            }
+            for (var index = 0; index < origin.Length; index++) list.Add(origin[index]);
             return list;
         }
 
@@ -147,10 +127,7 @@ namespace Baracuda.DOTS.Collections
             Allocator allocator) where T : unmanaged, IEquatable<T>
         {
             var set = new UnsafeHashSet<T>(collection.Count, allocator);
-            foreach (var element in collection)
-            {
-                set.Add(element);
-            }
+            foreach (var element in collection) set.Add(element);
             return set;
         }
 
@@ -159,10 +136,7 @@ namespace Baracuda.DOTS.Collections
             where T : unmanaged, IEquatable<T>
         {
             var set = new UnsafeHashSet<T>(origin.Length, allocator);
-            foreach (var element in origin)
-            {
-                set.Add(element);
-            }
+            foreach (var element in origin) set.Add(element);
             return set;
         }
 
@@ -171,10 +145,7 @@ namespace Baracuda.DOTS.Collections
             where T : unmanaged, IEquatable<T>
         {
             var set = new UnsafeHashSet<T>(origin.Count, allocator);
-            foreach (var element in origin)
-            {
-                set.Add(element);
-            }
+            foreach (var element in origin) set.Add(element);
             return set;
         }
 
@@ -214,37 +185,25 @@ namespace Baracuda.DOTS.Collections
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void DisposeElements<T>(this UnsafeList<T> collection) where T : unmanaged, IDisposable
         {
-            foreach (var disposable in collection)
-            {
-                disposable.Dispose();
-            }
+            foreach (var disposable in collection) disposable.Dispose();
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void DisposeElements<T>(this NativeArray<T> collection) where T : unmanaged, IDisposable
         {
-            foreach (var disposable in collection)
-            {
-                disposable.Dispose();
-            }
+            foreach (var disposable in collection) disposable.Dispose();
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void DisposeElements<T>(this NativeList<T> collection) where T : unmanaged, IDisposable
         {
-            foreach (var disposable in collection)
-            {
-                disposable.Dispose();
-            }
+            foreach (var disposable in collection) disposable.Dispose();
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void DisposeElements<T>(this UnsafeArray<T> array) where T : unmanaged, IDisposable
         {
-            for (var index = 0; index < array.Length; index++)
-            {
-                array[index].Dispose();
-            }
+            for (var index = 0; index < array.Length; index++) array[index].Dispose();
         }
 
         #endregion

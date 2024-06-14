@@ -2,7 +2,7 @@ using System.Runtime.CompilerServices;
 using Unity.Mathematics;
 using UnityEngine;
 
-namespace Baracuda.DOTS
+namespace Baracuda.Native
 {
     public static class TypeConversionExtensions
     {

@@ -1,16 +1,17 @@
 {
-  "name": "com.baracuda.dots",
+  "name": "com.baracuda.native",
   "version": "1.0.0",
-  "displayName": "DOTS",
-  "description": "Data oriented systems and utilities",
+  "displayName": "Native",
+  "description": "Entity Component System and Data oriented systems and utilities",
   "unity": "2023.2",
-  "documentationUrl": "https://github.com/JohnBaracuda/com.baracuda.dots",
-  "changelogUrl": "https://github.com/JohnBaracuda/com.baracuda.dots/blob/main/CHANGELOG.md",
-  "licensesUrl": "https://github.com/JohnBaracuda/com.baracuda.dots/blob/main/LICENSE.md",
+  "documentationUrl": "https://github.com/JohnBaracuda/com.baracuda.native",
+  "changelogUrl": "https://github.com/JohnBaracuda/com.baracuda.native/blob/main/CHANGELOG.md",
+  "licensesUrl": "https://github.com/JohnBaracuda/com.baracuda.native/blob/main/LICENSE.md",
   "keywords": [
     "dots",
     "ecs",
-    "burst"
+    "burst",
+    "native"
   ],
   "author": {
     "name": "John Baracuda",
@@ -20,6 +21,7 @@
   "type": "tool",
   "dependencies": {
     "com.unity.burst": "1.8.15",
-    "com.unity.collections": "2.4.1"
+    "com.unity.collections": "2.4.1",
+    "com.unity.entities": "1.2.0"
   }
 }
